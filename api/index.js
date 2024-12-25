@@ -8,11 +8,16 @@ import authRoutes from '../api/routes/auth.route.js'
 
 
 dotenv.config();
-mongoose.connect(process.env.MONGO).then(()=>{
-    console.log('MongDB is connected');
-}).catch((err)=>{
-    console.log(err);
-});
+
+mongoose
+  .connect(process.env.MONGO, {
+  })
+  .then(() => {
+    console.log('MongoDB is connected');
+  })
+  .catch((err) => {
+    console.error(process.env.MONGO, err.message);
+  });
 
 
 
