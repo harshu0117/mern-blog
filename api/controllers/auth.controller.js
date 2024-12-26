@@ -66,5 +66,47 @@ export const signin = async (req,res,next)=>{
     } catch (error) {
         next(error)
     }
-
 };
+
+export const google = async (req, res, next) => {
+    const { email, name, googlePhotoUrl } = req.body;
+
+    try {
+        // Check if the user already exists
+        const user = await User.findOne({ email });
+        if (user) {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const { password, ...rest } = user.toObject();
+            return res
+                .status(200)
+                .cookie('access_token', token, { httpOnly: true })
+                .json(rest);
+        }
+
+        // Generate a random password
+        const generatePassword = Math.random().toString(36).slice(-12);
+        const hashedPassword = bcryptjs.hashSync(generatePassword, 10);
+
+        // Create a new user
+        const newUser = new User({
+            username: name.toLowerCase().split(' ').join('') + Math.random().toString(36).slice(-4),
+            email,
+            password: hashedPassword,
+            profilePicture: googlePhotoUrl,
+        });
+
+        await newUser.save();
+
+        // Generate a token for the new user
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+        const { password, ...rest } = newUser.toObject();
+        res.status(200)
+            .cookie('access_token', token, { httpOnly: true })
+            .json(rest);
+
+    } catch (error) {
+        console.error("Google OAuth Error:", error.message);
+        next(error);
+    }
+};
+

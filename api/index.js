@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from '../api/routes/user.route.js'
 import authRoutes from '../api/routes/auth.route.js'
+import cors from 'cors';
 // import cors from 'cors';  // Import CORS
 
 
@@ -22,7 +23,7 @@ mongoose
 
 
 const app = express();
-
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 
 // Middleware to parse JSON requests
