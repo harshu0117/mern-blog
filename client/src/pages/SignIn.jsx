@@ -72,16 +72,19 @@ export default function SignIn() {
                       <Label value='Your password' />
                       <TextInput type='password' placeholder='Password' id='password' onChange={handleChange}/>     
                   </div>
-                  <Button gradientDuoTone='purpleToPink' type='submit' disabled={loading}>
-                    {
-                     
-                      loading ? (
-                        <>
-                        <Spinner size='sm'/>
-                        <span>Loading...</span>
-                        </>
-                      ):'Sign In!'
-                    }
+                  <Button
+                    gradientDuoTone='purpleToPink'
+                    type='submit'
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <Spinner size='sm' />
+                        <span className='pl-3'>Loading...</span>
+                      </>
+                    ) : (
+                      'Sign In'
+                    )}
                   </Button>
                   <OAuth/>
             </form>

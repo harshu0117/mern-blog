@@ -36,9 +36,14 @@ export default function OAuth() {
 
     
   return (
-    <Button type='button' gradientDuoTone='pinkToOrange' outline onClick={handleGoogleClick}>
-        <AiFillGoogleCircle className='w-6 h-6 mr-2'/>
+    <button
+        type="button"
+        onClick={handleGoogleClick}
+        className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-xl text-gray-900 bg-gradient-to-r from-pink-500 to-orange-500 dark:bg-gray-800 dark:text-gray-100 hover:from-pink-600 hover:to-orange-600 transition-colors"
+        >
+        <AiFillGoogleCircle className="w-6 h-6 mr-2 " />
         Continue with Google
-    </Button>
+    </button>
+
   )
 }
