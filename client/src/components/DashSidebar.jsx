@@ -14,7 +14,7 @@ export default function DashSidebar() {
         if (tabFromUrl) {
         setTab(tabFromUrl);
         }
-    },[loacation.search]);
+    },[location.search]);
   
     return (
     <Sidebar className='w-full md:w-56'>

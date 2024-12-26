@@ -13,7 +13,7 @@ export default function Dasjboard() {
     if (tabFromUrl) {
       setTab(tabFromUrl);
     }
-  },[loacation.search]);
+  },[location.search]);
   return (
     <div className="min-h-screen felx felx-col md:flex-row">
       <div className="md:w-56 ">
