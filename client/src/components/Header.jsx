@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useSelector } from 'react-redux';
+import { Avatar, Dropdown } from 'flowbite-react';
+import {Link} from 'react-router-dom';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { currentUser } = useSelector((state) => state.user); 
 
     return (
         <header className="bg-white shadow-md">
@@ -49,13 +53,40 @@ export default function Header() {
                     >
                         <FaMoon size={17} className="text-indigo-500" />
                     </button>
+                    {currentUser ? (
+                        <Dropdown 
+                        arrowIcon={false} 
+                        inline 
+                        label={
+                           <Avatar 
+                            alt='user'
+                            img={currentUser.prfilePicture}
+                            rounded
+                           />
+                        }>
+                            <Dropdown.Header>
+                                <span className="block text-sm">@{currentUser.username}</span>
+                                <span className="block text-sm font-medium truncate">@{currentUser.email}</span>
+                            </Dropdown.Header>
+                            <Link to={'/dashboard?tab=profile'}>
+                                <Dropdown.Item>Profile</Dropdown.Item>
+                            </Link>
+                            <Dropdown.Divider/>
+                            <Dropdown.Item>Sign Out</Dropdown.Item>
+                        </Dropdown>
+                    ):
+                    (
+                        <>
+                        <a href="/sign-in">
+                            <button className="px-4 py-2 text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-lg shadow-lg hover:opacity-90">
+                                Sign In
+                            </button> 
+                        </a>
+                        </>
+                    )
+                }
 
-                    {/* Sign In Button */}
-                    <a href="/sign-in">
-                        <button className="px-4 py-2 text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-lg shadow-lg hover:opacity-90">
-                            Sign In
-                        </button>
-                    </a>
+                    
                 </div>
 
                 {/* Hamburger Button */}
@@ -112,8 +143,38 @@ export default function Header() {
                     >
                         <FaMoon size={17} className="text-indigo-500" />
                     </button>
-
-                    {/* Sign In Button */}
+                    {currentUser ? (
+                        <Dropdown 
+                        arrowIcon={false} 
+                        inline 
+                        label={
+                           <Avatar 
+                            alt='user'
+                            img={currentUser.prfilePicture}
+                            rounded
+                           />
+                        }>
+                            <Dropdown.Header>
+                                <span className="block text-sm">@{currentUser.username}</span>
+                                <span className="block text-sm font-medium truncate">@{currentUser.email}</span>
+                            </Dropdown.Header>
+                            <Link to={'/dashboard?tab=profile'}>
+                                <Dropdown.Item>Profile</Dropdown.Item>
+                            </Link>
+                            <Dropdown.Divider/>
+                            <Dropdown.Item>Sign Out</Dropdown.Item>
+                        </Dropdown>
+                    ):
+                    (
+                        <>
+                        <a href="/sign-in">
+                            <button className="px-4 py-2 text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-lg shadow-lg hover:opacity-90">
+                                Sign In
+                            </button> 
+                        </a>
+                        </>
+                    )}
+                    
                     <a href="/sign-in">
                         <button className="px-4 py-2 text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-lg shadow-lg hover:opacity-90">
                             Sign In
