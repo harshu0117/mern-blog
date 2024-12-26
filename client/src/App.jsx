@@ -12,6 +12,7 @@ import FooterComp from './components/Footer'
 
 export default function App() {
   return (
+    <>
     <BrowserRouter>
       <Header/>
       <Routes>
@@ -24,5 +25,6 @@ export default function App() {
       </Routes>
       <FooterComp/>
     </BrowserRouter>
+    </>
   )
 }
